@@ -1,0 +1,22 @@
+{% if not auth_usuario %}
+    <form class="form-inline" action="." method="post">{% csrf_token %}
+        {% if auth_err %}
+        <p> Usuario o contraseña invalidos </p>
+        {% endif %}
+      <input type="text" name="username" class="input-small" placeholder="Usuario">
+      <input type="password" name="password" class="input-small" placeholder="Contraseña">
+      <button type="submit" class="btn">Iniciar Sesión</button>
+    </form>
+{% else %}
+    <p>El usuario:</p></br>
+    <h2>{{ auth_usuario }}</h2></br>
+    <p>esta en sesion</p></br>
+    <ul class="nav pull-right">
+        <li >
+            <a href="/index"></a>
+        </li>
+        <li>
+            <a href="/logout"> Cerrar Sesión </a>
+        </li>
+    </ul>
+{% endif %}
