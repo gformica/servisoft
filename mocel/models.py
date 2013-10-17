@@ -34,7 +34,7 @@ class Servicio(models.Model):
 	monto = models.DecimalField(max_digits=10,decimal_places=3)
 	
 	def __unicode__(self):
-		return self.id_servicio 
+		return self.id_servicio + " --- Nombre: " + self.nomb_servicio + " --- Descripcion: " + self.desc_servicio
 
 class Paquete(models.Model):
 	id_paquete = models.CharField(max_length=20,primary_key=True)
@@ -50,7 +50,7 @@ class Paquete(models.Model):
 	tipo_paquete = models.CharField(max_length=10,choices=TIPO_PAQUETE_CHOICES)
 
 	def __unicode__(self):
-		return self.id_paquete
+		return self.id_paquete + "- " + self.desc_paquete
 
 class Plan(models.Model):
 	id_plan = models.CharField(max_length=20,primary_key=True)
@@ -64,7 +64,7 @@ class Plan(models.Model):
 	tipo_plan = models.CharField(max_length=10,choices=TIPO_PLAN_CHOICES)
 	
 	def __unicode__(self):
-		return self.id_plan + " " + self.nomb_plan
+		return "Id: " + self.id_plan + " --- Nombre: " + self.nomb_plan + " --- Descripcion : " + self.desc_plan
 
 class Producto(models.Model):
 	nomb_producto = models.CharField(max_length=30)
@@ -73,7 +73,7 @@ class Producto(models.Model):
 	saldo = models.DecimalField(max_digits=10,decimal_places=3)
 
 	def __unicode__(self):
-		return self.id_producto + " ---  " + self.nomb_producto
+		return self.id_producto + " --- " + self.nomb_producto
 
 class Factura(models.Model):
 	nro_factura = models.IntegerField(primary_key=True)
@@ -85,7 +85,7 @@ class Factura(models.Model):
 	obs_factura = models.CharField(max_length=200)
 
 	def __unicode__(self):
-		return selfid_producto.id_producto + " --- " + self.fecha_factura 
+		return selfid_producto.id_producto + " --- " + str(self.fecha_factura) 
 	
 class Consumo(models.Model):
 	id_producto = models.ForeignKey(Producto)
@@ -95,7 +95,7 @@ class Consumo(models.Model):
 	cant_total_consumo = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return self.id_producto.id_producto + "consume " + self.id_servicio.id_servicio + " la cantidad de  " + self.cant_consumo
+		return self.id_producto.id_producto + " --- consume " + self.id_servicio.id_servicio + " la cantidad de  " + self.cant_consumo
 
 class Conforma(models.Model):
 	id_paquete = models.ForeignKey(Paquete)
@@ -103,14 +103,14 @@ class Conforma(models.Model):
 	cant_conforma = models.IntegerField(default=0)	
 	
 	def __unicode__(self):
-		return self.id_paquete.id_paquete + "esta conformado en parte por " + self.id_servicio.id_servicio
+		return self.id_paquete.id_paquete + " --- esta conformado en parte por " + self.id_servicio.id_servicio
 	
 class Posee(models.Model):	
 	id_plan = models.ForeignKey(Plan)
 	id_paquete = models.ForeignKey(Paquete)
 
 	def __unicode__(self):
-		return self.id_plan.id_plan + "posee el paquete " + self.id_paquete.id_paquete
+		return self.id_plan.id_plan + " --- posee el paquete " + self.id_paquete.id_paquete
 	
 class Agrega(models.Model):
 	id_producto = models.ForeignKey(Producto)
@@ -119,7 +119,7 @@ class Agrega(models.Model):
 	vigente_agrega = models.BooleanField()
 
 	def __unicode__(self):
-		return "el producto " + self.id_producto.id_producto + "agrega el paquete " + self.id_paquete.id_paquete
+		return "el producto " + self.id_producto.id_producto + " agrega el paquete " + self.id_paquete.id_paquete
 
 class Afilia(models.Model):
 	id_producto = models.ForeignKey(Producto)
@@ -129,7 +129,7 @@ class Afilia(models.Model):
 	vigente_afilia = models.BooleanField()
 
 	def __unicode__(self):
-		return "el producto " + self.id_producto.id_producto + "se afilio al plan " + self.id_plan.id_plan + "el dia " + self.fecha_afilia
+		return "El producto " + self.id_producto.id_producto + " se afilio al plan " + self.id_plan.id_plan + " el dia " + str(self.fecha_afilia)
 
 
 

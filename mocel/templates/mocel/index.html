@@ -1,0 +1,10 @@
+{% if cliente %}
+	<ul>
+	{% for producto in cliente.producto_set.all %}
+	    <li>{{ producto.id_producto }} -- Bs. {{ producto.saldo }} </li>
+	{% endfor %}    
+	</ul>
+{% else %}
+	<p> Error con cliente </p>
+{% endif %}
+
