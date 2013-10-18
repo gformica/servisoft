@@ -13,21 +13,23 @@ def index(request):
     lista_afilia_prepago = Afilia.objects.filter(id_producto__in=lista_productos, vigente_afilia=True, id_plan__tipo_plan="prepago")
    
     lista_afilia_postpago = Afilia.objects.filter(id_producto__in=lista_productos, vigente_afilia=True, id_plan__tipo_plan="postpago")
-    print lista_afilia_postpago
-    print lista_productos
     lista_producto_postpago = []
     for afilia in lista_afilia_postpago:
 	lista_producto_postpago.append(afilia.id_producto)
     lista_factura = Factura.objects.filter(id_producto__in=lista_producto_postpago) 	
-    
-	
-    print "HOLA"	
-    print lista_factura
 
-#    for afilia in lista_afilia_postpago:
-#	factura = Factura.objects.filter(id_producto__in=lista_afilia_postpago)
+    a = '418-3137818'
+    facts = []
     
-    #print lista_productos
+    for p in lista_producto_postpago:
+	i = p.id_producto
+    	dum = []
+    	for b in Factura.objects.raw('SELECT * FROM mocel_factura where id_producto_id=%s ORDER BY fecha_factura',[i]):
+		dum.append(b)
+	dum = dum[:1]
+	facts.append(dum[0])
+   
+    print facts
     return Render(request, 'mocel/index.html', locals())
 
 def login(request):

@@ -1,4 +1,5 @@
 {% if cliente.producto_set.all %}
+	<p>Productos Prepago</p>
 	<ul>
 	{% for producto in lista_afilia_prepago %}
 	    <li>{{ producto.id_producto }} -- Bs. {{ producto.id_producto.saldo }} </li>
@@ -6,8 +7,9 @@
 
 	</ul>
 
+	<p>Producots postpago</p>
 	<ul>
-	{% for factura in lista_factura %}
+	{% for factura in facts %}
 		<li>{{ factura }}</li>
 	{% endfor %}
 	</ul>
