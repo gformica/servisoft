@@ -73,7 +73,7 @@ class Producto(models.Model):
 	saldo = models.DecimalField(max_digits=10,decimal_places=3)
 
 	def __unicode__(self):
-		return self.id_producto + " --- " + self.nomb_producto
+		return self.id_producto + " - Bs." + str(self.saldo)
 
 class Factura(models.Model):
 	nro_factura = models.IntegerField(primary_key=True)
@@ -85,7 +85,7 @@ class Factura(models.Model):
 	obs_factura = models.CharField(max_length=200)
 
 	def __unicode__(self):
-		return self.id_producto.id_producto + " --- " + str(self.monto_factura) 
+		return self.id_producto.id_producto + "- Bs. " + str(self.monto_factura) 
 	
 class Consumo(models.Model):
 	id_producto = models.ForeignKey(Producto)
