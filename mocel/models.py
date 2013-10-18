@@ -85,7 +85,7 @@ class Factura(models.Model):
 	obs_factura = models.CharField(max_length=200)
 
 	def __unicode__(self):
-		return selfid_producto.id_producto + " --- " + str(self.fecha_factura) 
+		return self.id_producto.id_producto + " --- " + str(self.monto_factura) 
 	
 class Consumo(models.Model):
 	id_producto = models.ForeignKey(Producto)

@@ -10,7 +10,24 @@ def index(request):
     usuario = request.user
     cliente = get404(Cliente, user=usuario)
     lista_productos = Producto.objects.filter(id_cliente=cliente)
+    lista_afilia_prepago = Afilia.objects.filter(id_producto__in=lista_productos, vigente_afilia=True, id_plan__tipo_plan="prepago")
+   
+    lista_afilia_postpago = Afilia.objects.filter(id_producto__in=lista_productos, vigente_afilia=True, id_plan__tipo_plan="postpago")
+    print lista_afilia_postpago
     print lista_productos
+    lista_producto_postpago = []
+    for afilia in lista_afilia_postpago:
+	lista_producto_postpago.append(afilia.id_producto)
+    lista_factura = Factura.objects.filter(id_producto__in=lista_producto_postpago) 	
+    
+	
+    print "HOLA"	
+    print lista_factura
+
+#    for afilia in lista_afilia_postpago:
+#	factura = Factura.objects.filter(id_producto__in=lista_afilia_postpago)
+    
+    #print lista_productos
     return Render(request, 'mocel/index.html', locals())
 
 def login(request):

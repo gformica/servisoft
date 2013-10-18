@@ -1,8 +1,15 @@
-{% if cliente %}
+{% if cliente.producto_set.all %}
 	<ul>
-	{% for producto in cliente.producto_set.all %}
-	    <li>{{ producto.id_producto }} -- Bs. {{ producto.saldo }} </li>
-	{% endfor %}    
+	{% for producto in lista_afilia_prepago %}
+	    <li>{{ producto.id_producto }} -- Bs. {{ producto.id_producto.saldo }} </li>
+	{% endfor %}
+
+	</ul>
+
+	<ul>
+	{% for factura in lista_factura %}
+		<li>{{ factura }}</li>
+	{% endfor %}
 	</ul>
 {% else %}
 	<p> Error con cliente </p>
